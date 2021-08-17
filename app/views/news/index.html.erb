@@ -1,0 +1,18 @@
+<h1>NewsScraper</h1>
+
+<p>ヒット件数：<%= @title_ary.size %></p>
+
+<%= form_tag(news_search_path,:method => 'get') do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+
+<% if @title_ary.size == 0 then %>
+  <p>there is no news</p>
+<% else %>
+  <p>
+  <% @title_ary.zip(@link_ary) do |title,link| %>
+  <a href="<%= link %>" target="_blank" rel="noopener noreferrer"><%= title %></a><br>
+  <% end %>
+  </p>
+<% end %>
